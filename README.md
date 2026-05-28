@@ -1,76 +1,76 @@
 # 📊 outbound-final-report
 
-Skill para o Claude gerar relatórios profissionais de outbound B2B em `.docx` — modo mensal (clientes ativos) e modo encerramento (projetos finalizados).
+A Claude skill that generates professional B2B outbound reports in `.docx` format — available in two modes: **monthly** (for active clients) and **closing** (for finished projects).
 
 ---
 
-## O que essa skill faz
+## What this skill does
 
-- Lê o CSV de performance exportado do Snov.io (ou Instantly, Apollo, Lemlist)
-- Lê o print da base completa de listas para mapear o ICP construído
-- Lê o contexto do cliente via site, apresentação ou arquivo
-- Calcula KPIs: entrega, abertura, resposta, bounce e engajamentos notáveis
-- **Modo mensal:** realiza pesquisa de mercado via web search e gera insights acionáveis com fontes validadas
-- **Modo encerramento:** gera aprendizados do projeto e recomendações de continuidade
-- Entrega um `.docx` formatado com capa, tabelas, bloco de KPIs visuais e identidade visual profissional
+- Reads the performance CSV exported from Snov.io (or Instantly, Apollo, Lemlist)
+- Reads a screenshot of the full lead base to map the ICP built throughout the project
+- Reads client context from a website, presentation, or uploaded file
+- Calculates KPIs: delivery rate, open rate, reply rate, bounce rate, and notable engagements
+- **Monthly mode:** runs a web search for up-to-date market data and generates actionable insights backed by validated sources
+- **Closing mode:** generates project learnings and continuity recommendations
+- Delivers a formatted `.docx` with cover page, tables, visual KPI blocks, and consistent design
 
 ---
 
-## Inputs necessários
+## Required inputs
 
-| Input | Formato | Obrigatório |
+| Input | Format | Required |
 |---|---|---|
-| Modo do relatório | mensal ou encerramento | Sim |
-| Nome do cliente e responsável | texto | Sim |
-| Período coberto | mês/ano ou intervalo | Sim |
-| CSV de performance | `.csv` exportado da ferramenta | Sim |
-| Print da base de listas | screenshot | Sim |
-| Contexto do cliente | URL do site, apresentação ou arquivo `.pptx`/`.pdf` | Sim |
-| Nome da agência elaboradora | texto | Sim |
-| Dados de meses anteriores (acumulado) | texto ou planilha | Opcional |
+| Report mode | monthly or closing | Yes |
+| Client name and point of contact | text | Yes |
+| Period covered | month/year or date range | Yes |
+| Performance CSV | `.csv` exported from the outbound tool | Yes |
+| Screenshot of the full lead base | image | Yes |
+| Client context | website URL, presentation URL, or `.pptx`/`.pdf` file | Yes |
+| Agency name (report author) | text | Yes |
+| Previous months data (accumulated) | text or spreadsheet | Optional |
 
 ---
 
-## Ferramentas suportadas
+## Supported tools
 
-- **Snov.io** (padrão — PT e EN)
+- **Snov.io** (default — PT and EN)
 - Instantly
 - Apollo
 - Lemlist
 
 ---
 
-## Como instalar
+## How to install
 
-1. Faça o download do arquivo `SKILL.md` deste repositório
-2. No Claude, vá em **Settings > Skills**
-3. Faça upload do arquivo
-4. Pronto — na próxima conversa, o Claude reconhece automaticamente quando você precisa de um relatório de outbound
-
----
-
-## Como usar
-
-Basta iniciar uma conversa com algo como:
-
-> "Preciso gerar o relatório mensal de outbound do cliente X"
-
-> "Vamos fechar o relatório final do projeto Y"
-
-O Claude vai solicitar os inputs necessários e gerar o `.docx` ao final.
+1. Download the `SKILL.md` file from this repository
+2. In Claude, go to **Settings > Skills**
+3. Upload the file
+4. Done — Claude will automatically recognize when you need an outbound report
 
 ---
 
-## Estrutura do relatório
+## How to use
 
-### Modo mensal
-`Capa` → `Contexto do projeto` → `Base de listas e ICP` → `Performance do mês` → `Engajamentos notáveis` → `Insights e pontos de melhoria` → `Próximos passos`
+Just start a conversation with something like:
 
-### Modo encerramento
-`Capa` → `Contexto do projeto` → `Listas e ICP` → `Performance geral` → `Engajamentos notáveis` → `Aprendizados` → `Entregas do projeto` → `Considerações finais`
+> "Generate the monthly outbound report for client X"
+
+> "Let's close the final report for project Y"
+
+Claude will request the necessary inputs and deliver the `.docx` at the end.
 
 ---
 
-## Desenvolvido por
+## Report structure
 
-[AN1](https://an1.com.br) — Marketing e Vendas B2B
+### Monthly mode
+`Cover` → `Project context` → `Lead base & ICP` → `Month performance` → `Notable engagements` → `Insights & improvement points` → `Next steps`
+
+### Closing mode
+`Cover` → `Project context` → `Lists & ICP` → `Overall performance` → `Notable engagements` → `Learnings` → `Project deliverables` → `Final remarks`
+
+---
+
+## Built by
+
+[AN1](https://an1.com.br) — B2B Marketing & Sales
