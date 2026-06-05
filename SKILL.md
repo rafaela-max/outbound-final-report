@@ -86,8 +86,17 @@ metricas = ['Entregues','Devolvidos','Abertos','Cliques','Respostas','Respondido
 totais = real[metricas].sum()
 
 # 3. Por campanha
+# ATENÇÃO: o CSV do Snov.io exporta múltiplas linhas por lead (uma por e-mail da sequência).
+# Isso faz com que somar "Abertos" pelo CSV produza totais inflados.
+# Regras:
+# - "Abertos" e "Cliques" do CSV = válidos apenas como VOLUME BRUTO de interações. Use para engajamentos notáveis.
+# - "Abertura %" = NUNCA calcule pelo CSV. Leia diretamente do print da tela da plataforma.
+#   O Snov.io exibe a taxa correta (por leads únicos) na coluna "Aberturas do e-mail %" da tela de campanhas.
+# - "Bounce %" = pode calcular pelo CSV (Devolvidos é registrado uma vez por lead).
+
 por_campanha = real.groupby('Nome da campanha')[metricas].sum()
-por_campanha['Abertura%'] = (por_campanha['Abertos'] / por_campanha['Entregues'] * 100).round(1)
+# Abertura% NÃO deve ser calculada aqui — preencher manualmente com os valores do print da tela:
+# abertura_pct = {'Campanha X': 62.0, 'Campanha Y': 55.0}
 por_campanha['Bounce%'] = (por_campanha['Devolvidos'] / (por_campanha['Entregues'] + por_campanha['Devolvidos']) * 100).round(1)
 
 # 4. Cargos (decision makers)
@@ -124,7 +133,7 @@ Calcule e guarde para usar no relatório:
 - **Total de listas criadas** e **total de leads mapeados** (do print)
 - **Total de contatos alcançados** (excluindo testes, do CSV)
 - **E-mails entregues** + **taxa de entrega** (entregues / total)
-- **Total de aberturas** + **taxa média de abertura**
+- **Total de aberturas brutas** (do CSV, válido como volume) + **taxa de abertura %** (lida do print da tela da plataforma — nunca calculada pelo CSV)
 - **Respostas diretas** + **taxa de resposta**
 - **Cliques** e **auto-respostas**
 - **Bounce rate** (devolvidos / total enviado)
@@ -134,7 +143,7 @@ nos KPIs principais (ex: "↑ 12% vs. mês anterior").
 
 **Benchmark de mercado (incluir no relatório):**
 - Taxa de resposta B2B no Brasil: 1% a 5% para listas bem segmentadas
-- Taxa de abertura saudável por e-mail individual: 30-50% (acima de 100% em sequências é normal)
+- Taxa de abertura saudável em cold email B2B: 30-65% (calculada pela plataforma sobre leads únicos, conforme exibido na tela do Snov.io)
 - Bounce rate aceitável: abaixo de 5%
 
 ---
@@ -263,8 +272,9 @@ Tipos: "Resposta direta", "Auto-resposta", "Clique em link"
 título em bold (PRIMARY) + corpo em texto normal + tag de categoria em GRAY itálico + fonte da referência
 
 **Nota obrigatória no rodapé da seção de performance:**
-> "A taxa de abertura acima de 100% é esperada em campanhas de sequência multi-etapa.
-> Cada e-mail da sequência conta como nova abertura pelo mesmo contato."
+> "O total de aberturas exibido (volume bruto) é superior ao número de leads porque cada e-mail
+> da sequência gera um novo registro de abertura pelo mesmo contato. A taxa de abertura %
+> exibida é a calculada pela plataforma sobre leads únicos e deve ser lida diretamente da tela."
 
 ---
 
